@@ -1,10 +1,10 @@
-import { AppPerformance } from "@/components/app-performance"
-import { Insights } from "@/components/insights"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { UserFeedback } from "@/components/user-feedback"
-import { UserStats } from "@/components/user-stats"
+import { UserStats } from "./components/user-stats"
+import { AppPerformance } from "./components/app-performance"
+import { Insights } from "./components/insights"
+import { UserFeedback } from "./components/user-feedback"
 
-export default function Page() {
+export default function Dashboard() {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Analytics Dashboard</h1>
@@ -31,3 +31,4 @@ export default function Page() {
     </div>
   )
 }
+
