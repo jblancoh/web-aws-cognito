@@ -19,8 +19,8 @@ export default function AmplifyProvider({
             userPoolId: process.env.NEXT_PUBLIC_AWS_USER_POOL_ID || '',
             userPoolClientId: process.env.NEXT_PUBLIC_AWS_USER_POOL_WEB_CLIENT_ID || '',
             loginWith: { 
-              username: true,
-              email: true 
+              email: true,
+              username: false
             },
             // Asegurar que las credenciales se almacenen correctamente
             storage: 'localStorage',

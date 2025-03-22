@@ -76,3 +76,54 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Estilos personalizados para AWS Amplify UI React Authenticator */
+[data-amplify-authenticator] {
+  --amplify-components-authenticator-router-background-color: white;
+  --amplify-components-authenticator-router-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  --amplify-components-authenticator-router-border-radius: 10px;
+  --amplify-components-authenticator-router-border-width: 0;
+  --amplify-components-authenticator-form-padding: var(--amplify-space-medium) var(--amplify-space-xl) var(--amplify-space-xl);
+  
+  /* Botones primarios */
+  --amplify-components-button-primary-background-color: #3b82f6;
+  --amplify-components-button-primary-hover-background-color: #2563eb;
+  --amplify-components-button-primary-focus-background-color: #2563eb;
+  --amplify-components-button-border-radius: 6px;
+  
+  /* Campos de formulario */
+  --amplify-components-fieldcontrol-border-color: #e5e7eb;
+  --amplify-components-fieldcontrol-focus-border-color: #3b82f6;
+  --amplify-components-fieldcontrol-focus-box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+  --amplify-components-fieldcontrol-border-radius: 6px;
+  
+  /* Tabs */
+  --amplify-components-tabs-item-active-border-color: #3b82f6;
+  --amplify-components-tabs-item-color: #6b7280;
+  --amplify-components-tabs-item-active-color: #3b82f6;
+  
+  /* Enlaces */
+  --amplify-components-button-link-color: #3b82f6;
+  --amplify-components-button-link-hover-color: #2563eb;
+}
+
+/* Cambios adicionales de estilo para el formulario */
+.amplify-button--primary {
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+}
+
+.amplify-tabs-item {
+  font-weight: 500;
+}
+
+.amplify-field-group__control input {
+  padding: 0.6rem 0.8rem;
+}
+
+/* Mejoras responsive */
+@media (max-width: 640px) {
+  [data-amplify-authenticator] {
+    --amplify-components-authenticator-form-padding: var(--amplify-space-small) var(--amplify-space-medium) var(--amplify-space-medium);
+  }
+}

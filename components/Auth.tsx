@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { Authenticator, ThemeProvider, View } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import { getCurrentUser } from 'aws-amplify/auth';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 // Definir los campos del formulario
@@ -13,33 +12,90 @@ const formFields = {
     email: {
       order: 1,
       isRequired: true,
-    },
-    username: {
-      order: 2,
-      isRequired: true,
+      placeholder: 'Correo electrónico',
+      label: 'Correo electrónico'
     },
     password: {
-      order: 3,
+      order: 2,
       isRequired: true,
+      placeholder: 'Contraseña',
+      label: 'Contraseña'
     },
     confirm_password: {
-      order: 4,
+      order: 3,
       isRequired: true,
+      placeholder: 'Confirmar contraseña',
+      label: 'Confirmar contraseña'
     },
     name: {
-      order: 5,
+      order: 4,
       isRequired: true,
-      label: 'Nombre completo'
+      label: 'Nombre completo',
+      placeholder: 'Nombre completo'
     },
     address: {
-      order: 6,
+      order: 5,
       isRequired: true,
-      label: 'Dirección'
+      label: 'Dirección',
+      placeholder: 'Dirección'
     },
     phone_number: {
-      order: 7,
+      order: 6,
       isRequired: true,
-      label: 'Teléfono (formato +1234567890)'
+      label: 'Teléfono (formato +1234567890)',
+      placeholder: 'Formato: +1234567890'
+    }
+  },
+  signIn: {
+    username: {
+      order: 1,
+      isRequired: true,
+      placeholder: 'Correo electrónico',
+      label: 'Correo electrónico'
+    },
+    password: {
+      order: 2,
+      isRequired: true,
+      placeholder: 'Contraseña',
+      label: 'Contraseña'
+    }
+  }
+};
+
+// Tema personalizado para el Authenticator
+const theme = {
+  name: 'Auth Custom Theme',
+  tokens: {
+    colors: {
+      brand: {
+        primary: {
+          10: '#f0f9ff',
+          20: '#e0f2fe',
+          40: '#bae6fd',
+          60: '#38bdf8',
+          80: '#0284c7',
+          90: '#0369a1',
+          100: '#075985'
+        }
+      }
+    },
+    components: {
+      authenticator: {
+        router: {
+          borderWidth: '0',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+          borderRadius: '12px',
+        },
+        container: {
+          widthMax: '500px'
+        },
+        footer: {
+          paddingBottom: '2rem'
+        }
+      },
+      button: {
+        fontWeight: '600'
+      }
     }
   }
 };
@@ -77,7 +133,7 @@ function AuthenticatedContent({ user, signOut, authError, router }: Authenticate
       {user ? (
         <div>
           <h1 className="text-2xl font-bold mb-4">
-            ¡Bienvenido, {user.username}!
+            ¡Bienvenido!
           </h1>
           <p className="mb-4">Redirigiendo al dashboard...</p>
           <button
@@ -99,18 +155,25 @@ export function Auth() {
   const [authError, setAuthError] = useState<string | null>(null);
 
   return (
-    <Authenticator 
-      formFields={formFields}
-      signUpAttributes={['name', 'email', 'address', 'phone_number']}
-    >
-      {({ signOut, user }) => (
-        <AuthenticatedContent 
-          user={user} 
-          signOut={signOut} 
-          authError={authError} 
-          router={router} 
-        />
-      )}
-    </Authenticator>
+    <ThemeProvider theme={theme}>
+      <View className="flex justify-center items-center p-4">
+        <Authenticator 
+          formFields={formFields}
+          signUpAttributes={['name', 'email', 'address', 'phone_number']}
+          loginMechanisms={['email']}
+          hideSignUp={false}
+          variation="modal"
+        >
+          {({ signOut, user }) => (
+            <AuthenticatedContent 
+              user={user} 
+              signOut={signOut} 
+              authError={authError} 
+              router={router} 
+            />
+          )}
+        </Authenticator>
+      </View>
+    </ThemeProvider>
   );
 } 
